@@ -1,0 +1,12 @@
+POST http://localhost:8081/books
+Content-Type: application/json
+
+{
+  "author": "{{$random.alphanumeric(10)}}",
+  "isbn": "{{$random.uuid}}",
+  "price": {{$random.float}},
+  "title": "{{$random.alphabetic(20)}}"
+}
+
+//# GET https://localhost:8081/books
+//# Accept: application/json

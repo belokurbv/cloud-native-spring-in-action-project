@@ -36,7 +36,6 @@ class BookControllerMvcTests {
 
     @Test
     void whenBookAddedReturnStatusShouldBeCreated() throws Exception {
-        String isbn = "73737313940";
         var book = new Book(
                 "73737313940",
                 "demo",

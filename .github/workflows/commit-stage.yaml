@@ -25,11 +25,13 @@ jobs:
         uses: anchore/scan-action@v3
         id: scan
         with:
-          path: "${{ github.workspace }}"
+          image: 'your_image_name_here:tag'  # Ensure this is specified correctly
           fail-build: false
           severity-cutoff: high
+          output-format: 'sarif'  # Ensure Anchore outputs a SARIF file
+          sarif-file-path: 'anchore-results.sarif'  # Specify where to store the SARIF file
       - name: Upload vulnerability report
         uses: github/codeql-action/upload-sarif@v3
         if: success() || failure()
         with:
-          sarif_file: ${{ steps.scan.outputs.sarif }}
+          sarif_file: anchore-results.sarif  # Directly reference the path used above

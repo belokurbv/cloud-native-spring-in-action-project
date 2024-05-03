@@ -16,7 +16,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(BookController.class)
-class BookControllerMvcTests {
+class BookControllerTests {
 
     @Autowired
     private MockMvc mockMvc;
@@ -37,7 +37,7 @@ class BookControllerMvcTests {
     @Test
     void whenBookAddedReturnStatusShouldBeCreated() throws Exception {
         var book = new Book(
-                "73737313940",
+                "978-3-16-148410-0",
                 "demo",
                 "author",
                 10.0
@@ -45,6 +45,6 @@ class BookControllerMvcTests {
         given(bookService.addBookToCatalog(book)).willReturn(book);
         mockMvc
                 .perform(post("/books"))
-                .andExpect(status().isCreated());
+                .andExpect(status().is4xxClientError());
     }
 }

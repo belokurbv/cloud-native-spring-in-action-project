@@ -13,6 +13,7 @@ java {
 
 ext {
 	set('springCloudVersion', "2023.0.1")
+	set('testContainersVersion', "1.17.3")
 }
 
 repositories {
@@ -25,15 +26,22 @@ dependencies {
 	implementation 'org.springframework.cloud:spring-cloud-starter-config'
 	testImplementation 'org.springframework.boot:spring-boot-starter-webflux'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.testcontainers:postgresql'
 	implementation 'org.springframework.retry:spring-retry'
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
+	runtimeOnly 'org.postgresql:postgresql'
+	implementation 'org.flywaydb:flyway-core'
 }
 
 dependencyManagement {
 	imports {
 		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+		mavenBom "org.testcontainers:testcontainers-bom:${testContainersVersion}"
 	}
 }
+
+
 tasks.named('test') {
 	useJUnitPlatform()
 }

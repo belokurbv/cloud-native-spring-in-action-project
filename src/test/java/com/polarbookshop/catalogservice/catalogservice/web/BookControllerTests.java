@@ -1,4 +1,4 @@
-package com.polarbookshop.catalogservice.catalogservice;
+package com.polarbookshop.catalogservice.catalogservice.web;
 
 import com.polarbookshop.catalogservice.controller.BookController;
 import com.polarbookshop.catalogservice.domain.Book;
@@ -36,7 +36,7 @@ class BookControllerTests {
 
     @Test
     void whenBookAddedReturnStatusShouldBeCreated() throws Exception {
-        var book = new Book(
+        var book = Book.of(
                 "978-3-16-148410-0",
                 "demo",
                 "author",

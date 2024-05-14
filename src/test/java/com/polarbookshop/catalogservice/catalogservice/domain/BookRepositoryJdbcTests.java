@@ -33,7 +33,7 @@ public class BookRepositoryJdbcTests {
     @Test
     void findBookByIsbnWhenExisting() {
         var bookIsbn = "12345678";
-        var book = Book.of(bookIsbn, "title", "Author", 10.0);
+        var book = Book.of(bookIsbn, "title", "Author", 10.0, "Demo");
         template.insert(book);
         Optional<Book> actual = bookRepository.findByIsbn(bookIsbn);
         assertThat(actual).isPresent();

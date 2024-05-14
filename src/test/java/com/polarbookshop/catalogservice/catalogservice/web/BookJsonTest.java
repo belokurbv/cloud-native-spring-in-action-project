@@ -19,7 +19,7 @@ class BookJsonTest {
     @Test
     void testSerialize() throws Exception {
         var now = Instant.now();
-        var book = new Book(1L, "1234567890", "Title", "Author", 9.90, 21, now, now);
+        var book = new Book(1L, "1234567890", "Title", "Author", 9.90, , 21, now, now);
         var jsonContent = json.write(book);
         assertThat(jsonContent).extractingJsonPathStringValue("@.isbn")
                 .isEqualTo(book.isbn());
@@ -53,6 +53,7 @@ class BookJsonTest {
                 """;
         assertThat(json.parse(content))
                 .usingRecursiveComparison()
-                .isEqualTo(new Book(394L, "1234567890", "Title", "Author", 9.90, 21, instant, instant));
+                .isEqualTo(new Book(394L, "1234567890", "Title", "Author", 9.90, "Polarsophia",
+                        21, instant, instant));
     }
 }

@@ -21,9 +21,9 @@ public class BookDataLoader {
     public void loadBookTestData() {
         bookRepository.deleteAll();
         var book1 = Book.of("1234567891", "Northern Lights",
-                "Lyra", 19.90);
+                "Lyra", 19.90, "Demo");
         var book2 = Book.of("1234567892", "Polar Journey",
-                "Polarson", 12.90);
+                "Polarson", 12.90, "Demo");
         bookRepository.save(book1);
         bookRepository.save(book2);
     }

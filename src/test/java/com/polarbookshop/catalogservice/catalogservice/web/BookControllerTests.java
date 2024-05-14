@@ -40,7 +40,8 @@ class BookControllerTests {
                 "978-3-16-148410-0",
                 "demo",
                 "author",
-                10.0
+                10.0,
+                "Demo"
         );
         given(bookService.addBookToCatalog(book)).willReturn(book);
         mockMvc

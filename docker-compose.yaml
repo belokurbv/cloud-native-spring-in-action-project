@@ -1,6 +1,5 @@
 version: "3.8"
 services:
-
   catalog-service:
     depends_on:
       - polar-postgres
@@ -19,14 +18,15 @@ services:
       - SPRING_CLOUD_CONFIG_URI=http://config-service:8888
 
   polar-postgres:
-    image: "postgres:14.4"
+    image: "postgres:13"
     container_name: "polar-postgres"
     ports:
       - 5432:5432
     environment:
       - POSTGRES_USER=user
       - POSTGRES_PASSWORD=password
-      - POSTGRES_DB=polardb_catalog
+    volumes:
+      - ./postgresql/init.sql:/docker-entrypoint-initdb.d/init.sql
 
   config-service:
     depends_on:

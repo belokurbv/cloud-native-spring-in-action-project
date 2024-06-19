@@ -17,6 +17,11 @@ POST http://localhost:9003/orders
 Content-Type: application/json
 
 {
-  "isbn": "{{$random.uuid}}",
+  "isbn": "1234567891",
   "quantity": 3
 }
+
+###
+
+GET http://localhost:8081/books
+Accept: application/json

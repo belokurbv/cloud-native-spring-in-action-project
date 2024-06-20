@@ -40,6 +40,6 @@ server:
 polar:
   testdata:
     enabled: true
-#  greeting: Hello world!
+  greeting: Hello world!
 
 

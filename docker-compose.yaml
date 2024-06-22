@@ -64,6 +64,8 @@ services:
       - BPL_JVM_THREAD_COUNT=50
       - CATALOG_SERVICE_URL=http://catalog-service:8081
       - ORDER_SERVICE_URL=http://order-service:9003
+      - SPRING_CLOUD_CONFIG_URI=http://config-service:8888
+      - REDIS_URL=polar-redis
   polar-redis:
     image: "redis:7.0"
     container_name: "polar-redis"

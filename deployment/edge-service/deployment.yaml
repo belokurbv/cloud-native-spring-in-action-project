@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: edge-service
+  labels:
+    app: edge-service
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: edge-service
+  template:
+    metadata:
+      labels:
+        app: edge-service
+    spec:
+      containers:
+        - name: edge-service
+          image: edge-service
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 9999
+          env:
+            - name: BPL_JVM_THREAD_COUNT
+              value: "50"
+            - name: SPRING_CLOUD_CONFIG_URI
+              value: http://config-service:8888
+            - name: CATALOG_SERVICE_URL
+              value: http://catalog-service:8081
+            - name: ORDER_SERVICE_URL
+              value: http://order-service:9003
+            - name: REDIS_URL
+              value: polar-redis

@@ -24,4 +24,4 @@ spec:
             - name: BPL_JVM_THREAD_COUNT
               value: "50"
             - name: SPRING_CLOUD_CONFIG_URI
-              value: http://config-service:8888
+              value: http://config-service

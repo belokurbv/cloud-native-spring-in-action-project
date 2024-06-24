@@ -28,4 +28,4 @@ spec:
             - name: SPRING_PROFILES_ACTIVE
               value: testdata
             - name:  SPRING_CLOUD_CONFIG_URI
-              value: http://config-service:8888
+              value: http://config-service

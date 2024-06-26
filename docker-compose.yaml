@@ -51,11 +51,16 @@ services:
     environment:
       - BPL_JVM_THREAD_COUNT=50
       - SPRING_CLOUD_CONFIG_URI=http://config-service:8888
+  polar-redis:
+    image: "redis:7.0"
+    container_name: "polar-redis"
+    ports:
+      - "6379:6379"
   edge-service:
     depends_on:
       - polar-postgres
       - config-service
-      - poler-redis
+      - polar-redis
     image: "edge-service"
     container_name: "edge-service"
     ports:
@@ -66,8 +71,11 @@ services:
       - ORDER_SERVICE_URL=http://order-service:9003
       - SPRING_CLOUD_CONFIG_URI=http://config-service:8888
       - REDIS_URL=polar-redis
-  polar-redis:
-    image: "redis:7.0"
-    container_name: "polar-redis"
+  polar-rabbitmq:
+    image: rabbitmq:3.10-management
+    container_name: polar-rabbitmq
     ports:
-      - "6379:6379"
+      - 5672:5672 # The port where RabbitMQ listens for AMQP requests
+      - 15672:15672 # The port that exposes the management GUI
+    volumes:
+      - ./rabbitmq/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf

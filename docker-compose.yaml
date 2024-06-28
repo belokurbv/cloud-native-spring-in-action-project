@@ -71,7 +71,7 @@ services:
     environment:
       - BPL_JVM_THREAD_COUNT=50
       - SPRING_CLOUD_CONFIG_URI=http://config-service:8888
-      - SPRING_RABBITMQ_HOST=polar-rabbitmq
+      - SPRING_DATA_REDIS_HOST=polar-rabbitmq
   polar-rabbitmq:
     image: rabbitmq:3.10-management
     container_name: polar-rabbitmq
@@ -88,7 +88,7 @@ services:
     image: "dispatcher-service"
     container_name: "dispatcher-service"
     ports:
-      - "9999:9999"
+      - "9004:9004"
     environment:
       - BPL_JVM_THREAD_COUNT=50
       - CATALOG_SERVICE_URL=http://catalog-service:8081

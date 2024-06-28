@@ -23,21 +23,21 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:9004/books
+GET http://localhost:9999/books
 Accept: application/json
 
 ###
 
-GET http://localhost:9004/orders
+GET http://localhost:9999/orders
 Accept: application/json
 
 ###
-GET http://localhost:9004/orders
+GET http://localhost:9999/orders
 Accept: application/json
 
 
 ### post orders edge service
-POST http://localhost:9004/orders
+POST http://localhost:9999/orders
 Content-Type: application/json
 
 {

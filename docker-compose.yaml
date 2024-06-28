@@ -51,6 +51,9 @@ services:
     environment:
       - BPL_JVM_THREAD_COUNT=50
       - SPRING_CLOUD_CONFIG_URI=http://config-service:8888
+      - SPRING_R2DBC_URL=r2dbc:postgresql://polar-postgres:5432/polardb_order
+      - SPRING_FLYWAY_URL=jdbc:postgresql://polar-postgres:5432/polardb_order
+      - SPRING_RABBITMQ_HOST=polar-rabbitmq
   polar-redis:
     image: "redis:7.0"
     container_name: "polar-redis"
@@ -64,13 +67,11 @@ services:
     image: "edge-service"
     container_name: "edge-service"
     ports:
-      - "80:9999"
+      - "9999:9999"
     environment:
       - BPL_JVM_THREAD_COUNT=50
-      - CATALOG_SERVICE_URL=http://catalog-service:8081
-      - ORDER_SERVICE_URL=http://order-service:9003
       - SPRING_CLOUD_CONFIG_URI=http://config-service:8888
-      - REDIS_URL=polar-redis
+      - SPRING_RABBITMQ_HOST=polar-rabbitmq
   polar-rabbitmq:
     image: rabbitmq:3.10-management
     container_name: polar-rabbitmq
@@ -79,3 +80,18 @@ services:
       - 15672:15672 # The port that exposes the management GUI
     volumes:
       - ./rabbitmq/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+  dispatcher-service:
+    depends_on:
+      - polar-postgres
+      - config-service
+      - polar-rabbitmq
+    image: "dispatcher-service"
+    container_name: "dispatcher-service"
+    ports:
+      - "9999:9999"
+    environment:
+      - BPL_JVM_THREAD_COUNT=50
+      - CATALOG_SERVICE_URL=http://catalog-service:8081
+      - ORDER_SERVICE_URL=http://order-service:9003
+      - SPRING_CLOUD_CONFIG_URI=http://config-service:8888
+      - REDIS_URL=polar-redis

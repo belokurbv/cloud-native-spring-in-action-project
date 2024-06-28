@@ -23,10 +23,24 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:8081/books
+GET http://localhost:9004/books
 Accept: application/json
 
 ###
 
-GET http://localhost:9999/orders
+GET http://localhost:9004/orders
 Accept: application/json
+
+###
+GET http://localhost:9004/orders
+Accept: application/json
+
+
+### post orders edge service
+POST http://localhost:9004/orders
+Content-Type: application/json
+
+{
+  "isbn": "1234567891",
+  "quantity": 3
+}
